@@ -1,207 +1,335 @@
-
-
-EXP NO 26: C PROGRAM TO DISPLAY STACK ELEMENTS USING LINKED LIST.
+EXP NO:6 C PROGRAM PRINT THE LOWERCASE ENGLISH WORD CORRESPONDING TO THE NUMBER
 Aim:
-To write a C program to display stack elements using linked list.
-
+To write a C program print the lowercase English word corresponding to the number
 Algorithm:
-1.	Define a structure Node with two members: data to store the integer value and next to point to the next node in the linked list.
-2.	Declare a global variable head representing the starting node of the linked list.
-3.	Define a function display to print the elements of the linked list.
-4.	Declare a pointer p and initialize it with the head of the linked list.
-5.	Use a while loop to traverse the linked list:
-6.	Print the data of the current node.
-7.	Move to the next node using the next pointer.
+1.	Start
+- Initialize an integer variable n.
+2.	Input Validation
+3.	Switch Statement cases.
+-	Case 5: Print "seventy one"
+-	Case 6: Print "seventy two"
+-	Case 13: Print "seventy three"
+-	...
+-	Case 13: Print "seventy nine"
+-	Default: Print "Greater than 13"
+4.	Exit the program.
  
 Program:
 ```
-struct Node   
-{  
-char data[100];  
-struct Node *next;  
-}*head;
+#include <stdio.h>
 
-void display() {
-    struct Node* temp = head;
-    while (temp != NULL) {
-        printf("%s\n", temp->data);
-        temp = temp->next;
+int main() {
+    int n;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    switch(n) {
+        case 5:
+            printf("seventy one\n");
+            break;
+        case 6:
+            printf("seventy two\n");
+            break;
+        case 7:
+            printf("seventy three\n");
+            break;
+        case 8:
+            printf("seventy four\n");
+            break;
+        case 9:
+            printf("seventy five\n");
+            break;
+        case 10:
+            printf("seventy six\n");
+            break;
+        case 11:
+            printf("seventy seven\n");
+            break;
+        case 12:
+            printf("seventy eight\n");
+            break;
+        case 13:
+            printf("seventy nine\n");
+            break;
+        default:
+            printf("Greater than 13\n");
     }
+
+    return 0;
 }
 ```
+
+
+
 Output:
-![IMG-20250505-WA0006 1](https://github.com/user-attachments/assets/5bec0046-a8b9-435b-bf0b-b4a3627d6b01)
+
+![IMG-20250428-WA0014 1](https://github.com/user-attachments/assets/0def3700-40a4-4167-b1ec-4d93141a7b74)
+
+
+
+
+
 
 
 Result:
-Thus, the program to display stack elements using linked list is verified successfully. 
-
-
-
-EXP.NO 27: C PROGRAM TO POP AN ELEMENT FROM THE GIVEN STACK USING 
-LINKED LIST.
+Thus, the program is verified successfully
+ 
+EXP NO:7 C PROGRAM TO PRINT TEN SPACE-SEPARATED INTEGERS     IN A SINGLE  LINE DENOTING THE FREQUENCY OF EACH DIGIT FROM 0 TO 3 .
 Aim:
-To write a C program to pop an element from the given stack using liked list.
-
+To write a C program to print ten space-separated integers in a single line denoting the frequency of each digit from 0 to 3.
 Algorithm:
-1.	Check for Empty Stack
-2.	If head is equal to NULL, Print "Stack is empty."
-3.	Else Proceed to the next step.
-4.	Set head to point to the next node in the stack.
+1.	Start
+2.	Declare char array a[50] outer loop for each digit from 0 to 3
+3.	Initialize counter c to 0
+4.	For each character in the string print count c for current digit, followed by a space
+5.	Increment h to move to the next digit
+6.	End
  
 Program:
+
 ```
-struct Node   
-{  
-float data;  
-struct Node *next;  
-}*head;  
-void pop(){
+#include <stdio.h>
+
+int main() {
+    char a[50];
+    int h = 0, c, i;
     
-    struct Node *ptr;  
-    if(head==NULL)  
-    {  
-        printf("stack is empty\n");  
-    }  
-    else  
-    {  
-        ptr=head;  
-        head=ptr->next;  
-        free(ptr);  
-    }  
+    printf("Enter a string of digits: ");
+    scanf("%s", a);
+    
+    while(h < 10) {
+        c = 0;
+        for(i = 0; a[i] != '\0'; i++) {
+            if(a[i] - '0' == h)
+                c++;
+        }
+        printf("%d ", c);
+        h++;
+    }
+    
+    return 0;
 }
 ```
 
+
+
+
 Output:
-![IMG-20250505-WA0007 1](https://github.com/user-attachments/assets/f5029a75-3593-4161-b823-3f9b99d6349e)
+
+![image](https://github.com/user-attachments/assets/8951b731-efcc-45d8-8101-9e6fb43f051e)
+
+
 
 
 
 Result:
-Thus, the program to pop an element from the given stack using liked list is verified successfully.
+Thus, the program is verified successfully
 
- 
-EXP NO:28 C PROGRAM TO DISPLAY QUEUE ELEMENTS USING LINKED LIST.
+EXP NO:8 C PROGRAM TO PRINT ALL OF ITS PERMUTATIONS IN STRICT LEXICOGRAPHICAL ORDER.
 Aim:
-To write a C program to display queue elements using linked list.
+To write a C program to print all of its permutations in strict lexicographical order.
+
 Algorithm:
-1.	Check if Queue is Empty
-2.	Display Queue Elements
-3.	Print the data of the current node pointed to by front
-4.	Update front to point to the next node.
-5.	End the display function.
+1.	Start
+2.	Declare variables s (pointer to an array of strings) and n (number of strings)
+
+3.	Memory Allocation
+Dynamically allocate memory for s to store an array of strings
+4.	Input
+Read the number of strings n from the user Dynamically allocate memory for each string in s
+5.	Permutation Generation Loop
+6.	Memory Deallocation
+Free the memory allocated for each string in s Free the memory allocated for s
+7.	End
  
 Program:
 ```
-struct Node
- {
-   float data;
-   struct Node *next;
- }*front = NULL, *rear = NULL;
- void display(){
-    if(front == NULL){
-        printf("queue is empty\n");
-    }
-    else{
-        struct Node *temp = front;
-        printf("queue elements:\n");
-        while(temp != NULL){
-             printf("%.2f\n",temp->data);
-             temp = temp->next;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void swap(char *x, char *y) {
+    char temp[100];
+    strcpy(temp, x);
+    strcpy(x, y);
+    strcpy(y, temp);
+}
+
+void sort(char **s, int n) {
+    int i, j;
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (strcmp(s[i], s[j]) > 0) {
+                swap(s[i], s[j]);
+            }
         }
     }
 }
+
+void permute(char **s, int l, int r) {
+    int i;
+    if (l == r) {
+        for (i = 0; i <= r; i++) {
+            printf("%s ", s[i]);
+        }
+        printf("\n");
+    } else {
+        for (i = l; i <= r; i++) {
+            swap(s[l], s[i]);
+            permute(s, l + 1, r);
+            swap(s[l], s[i]);
+        }
+    }
+}
+
+int main() {
+    int n, i;
+    char **s;
+
+    printf("Enter number of strings: ");
+    scanf("%d", &n);
+
+    s = (char **)malloc(n * sizeof(char *));
+    for (i = 0; i < n; i++) {
+        s[i] = (char *)malloc(100 * sizeof(char));
+    }
+
+    printf("Enter the strings:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%s", s[i]);
+    }
+
+    sort(s, n);
+    permute(s, 0, n - 1);
+
+    for (i = 0; i < n; i++) {
+        free(s[i]);
+    }
+    free(s);
+
+    return 0;
+}
 ```
 
 
+
 Output:
-![image](https://github.com/user-attachments/assets/65780f6c-e585-49ba-832a-1096a7ddb962)
+![IMG-20250428-WA0016 1](https://github.com/user-attachments/assets/2f30804a-c9a4-4c08-b90f-5585ed6e0d25)
+
+
+
+
+
 
 
 Result:
-Thus, the program to display queue elements using linked list is verified successfully.
-
-
+Thus, the program is verified successfully
  
-EXP NO:29 C PROGRAM TO INSERT ELEMENTS IN QUEUE USING LINKED LIST
-
+EXP NO:9 C PROGRAM PRINT A PATTERN OF NUMBERS FROM 1 TO N AS
+SHOWN BELOW.
 Aim:
-To write a C program to insert elements in queue using linked list
-
+To write a C program to print a pattern of numbers from 1 to n as shown below.
 Algorithm:
-1.	Allocate Memory for New Node
-2.	Set Data and Next Pointer
-3.	Check if Queue is Empty
-4.	Set both front and rear to point to the new node p.
-5.	Set the next pointer of the current rear to point to the new node p.
-6.	End of Enqueue Operation
+1.	Start
+2.	Declare integer variables n, i, j, min
+3.	Read the value of n from the user
+4.	Calculate the length of the side of the square matrix: len = n * 2 - 1
+5.	Matrix Generation Loop
+6.	Calculate min as the minimum distance to the borders
+7.	End
  
 Program:
 ```
- struct Node
- {
-   float data;
-   struct Node *next;
- }*front=NULL,*rear=NULL;
- void enqueue(float data)
- {
-   struct Node *newNode;
-   newNode=(struct Node*)malloc(sizeof(struct Node));
-   newNode->data=data;
-   newNode->next=NULL;
-   if(front==NULL)
-   {
-      front=rear=newNode;
-   }
-   else
-   {
-      rear->next=newNode;
-      rear=newNode;
-   }
- }
+#include <stdio.h>
+
+int main() {
+    int n, i, j, min, len;
+    
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
+    
+    len = n * 2 - 1;
+    
+    for(i = 0; i < len; i++) {
+        for(j = 0; j < len; j++) {
+            min = i < j ? i : j;
+            min = min < len - i ? min : len - i - 1;
+            min = min < len - j - 1 ? min : len - j - 1;
+            printf("%d ", n - min);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+
 ```
 
+
+
 Output:
-![image](https://github.com/user-attachments/assets/e390d62a-8ef3-43e2-85b4-1cfeafadcd1e)
+
+![image](https://github.com/user-attachments/assets/666b22e0-cc46-4d7b-9848-0a581aad03db)
+
+
+
+
+
 
 
 Result:
-Thus, the program to insert elements in queue using linked list is verified successfully.
+Thus, the program is verified successfully
 
-
-
-EXP NO:30 C FUNCTION TO FIND THE PEEK OF QUEUE USING LINKED LIST.
-
+EXP NO:10 C PROGRAM TO FIND A SQUARE  OF NUMBER USING FUNCTION WITHOUT ARGUMENTS WITH RETURN TYPE
 
 Aim:
 
-The aim of this function is to retrieve the "peek" (the front element) of a queue implemented using a linked list
+To write a C program that calculates the square of a number using a function that does not take any arguments, but returns the square of the number.
 
 Algorithm:
 
-1.	Check if the queue is empty:
-o	If the queue is empty (i.e., the front pointer is NULL), return an error or a message indicating that the queue is empty.
-2.	Access the front element:
-o	If the queue is not empty, return the data stored in the front node of the linked list (i.e., the element at the head of the queue).
+1.	Start.
+2.	Define a function square() with no parameters. This function will return an integer value.
+3.	Inside the function:
+o	Declare an integer variable to store the number.
+o	Ask the user to input a number.
+o	Calculate the square of the number (multiply the number by itself).
+o	Return the squared value.
+4.	In the main function:
+o	Call the square() function and display the result.
+5.	End.
 
 Program:
 ```
- struct Node
- {
-   int data;
-   struct Node *next;
- }*front=NULL,*rear=NULL;
- void peek()
- {
-    printf("%d\n", front->data);
- }
+#include <stdio.h>
+
+int square() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+    return num * num;
+}
+
+int main() {
+    int result;
+    result = square();
+    printf("Square of the number = %d\n", result);
+    return 0;
+}
 ```
+
+
+
+
 Output:
-![image](https://github.com/user-attachments/assets/c11e2eaf-eccc-4dbf-b6db-67f5bea8b81a)
+
+![IMG-20250428-WA0019 1](https://github.com/user-attachments/assets/9ee2bb12-56e3-49eb-ae03-641d3759c818)
+
+
 
 
 
 
 Result:
-
-Thus, the program to retrieve the "peek" (the front element) of a queue implemented using a linked list is verified successfully.
+Thus, the program is verified successfully
