@@ -15,47 +15,49 @@ Else
 6.	Return 0
  
 Program:
-```
 
+````
 #include <stdio.h>
 
-struct Person
-{
-    char name[50];
+// Define the structure to hold person details
+struct eligible {
+    char n[50]; 
     int age;
 };
 
-int main()
-{
-    struct Person p[10];
-    int n, i;
+int main() {
+    int num, i;
 
-    printf("Enter number of persons: ");
-    scanf("%d", &n);
-
-    for(i = 0; i < n; i++)
-    {
-        printf("Enter name and age of person %d: ", i + 1);
-        scanf("%s %d", p[i].name, &p[i].age);
+    printf("Enter the number of persons: ");
+    scanf("%d", &num);
+    struct eligible e[num];
+    for (i = 0; i < num; i++) {
+        printf("\nEnter details for person %d:\n", i + 1);
+        printf("Enter Name: ");
+        scanf("%s", e[i].n);
+        printf("Enter Age: ");
+        scanf("%d", &e[i].age);
     }
+    printf("\n--- Vaccine Eligibility Results ---\n");
+    for (i = 0; i < num; i++) {
+        printf("\nName: %s\n", e[i].n);
+        printf("Age: %d\n", e[i].age);
 
-    printf("\nVaccine Eligibility:\n");
-
-    for(i = 0; i < n; i++)
-    {
-        if(p[i].age > 6)
-            printf("%s is Eligible for vaccine\n", p[i].name);
-        else
-            printf("%s is Not Eligible for vaccine\n", p[i].name);
+        if (e[i].age <= 6) {
+            printf("Vaccine Eligibility: No\n");
+        } else {
+            printf("Vaccine Eligibility: Yes\n");
+        }
     }
 
     return 0;
 }
-```
+````
+
 
 Output:
 
-<img width="842" height="305" alt="image" src="https://github.com/user-attachments/assets/2b150cbd-d172-4556-a1ae-2f8bb7504368" />
+<img width="390" height="715" alt="image" src="https://github.com/user-attachments/assets/809bc5e8-b6e6-47c5-aadb-e30424e0bad3" />
 
 
 
@@ -78,8 +80,28 @@ Algorithm:
 7.	Return 0
  
 Program:
+````
+#include <stdio.h>
+struct numbers {
+    int a;
+    int b;
+    int sum;
+};
+struct numbers add(struct numbers n) {
+    n.sum = n.a + n.b;
+    return n;
+}
 
-//type your code here
+int main() {
+    struct numbers n, result;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &n.a, &n.b);
+    result = add(n);
+    printf("Sum: %d\n", result.sum);
+
+    return 0;
+}
+````
 
 
 
@@ -87,7 +109,8 @@ Program:
 Output:
 
 
-//paste your output here
+<img width="322" height="101" alt="image" src="https://github.com/user-attachments/assets/7f2b2d71-fff6-4ea1-847f-3e3840cc9d0a" />
+
 
 
 
@@ -120,8 +143,32 @@ Use scanf to input the file name into the name array.
 5.	Return 0 to indicate successful program execution.
  
 Program:
+````
+#include <stdio.h>
+#include <stdlib.h>
 
-//type your code here
+int main() {
+    FILE *p;
+    char name[100];
+
+    printf("Enter the file name: ");
+    scanf("%s", name);
+
+    p = fopen(name, "w");
+
+    if (p == NULL) {
+        printf("Error opening file!\n");
+        exit(1);
+    }
+
+    printf("File '%s' created and opened successfully.\n", name);
+
+    fclose(p);
+    printf("File closed successfully.\n");
+
+    return 0;
+}
+````
 
 
 
@@ -129,7 +176,8 @@ Program:
 Output:
 
 
-//paste your output here
+<img width="371" height="90" alt="image" src="https://github.com/user-attachments/assets/833ac5df-9020-4cb3-b0eb-d8e76b7410a0" />
+
 
 
 
@@ -168,7 +216,27 @@ Use scanf to input the file name into the name array and the number of strings i
  
 Program:
 
-//type your code here
+````
+#include <stdio.h>
+
+int main() {
+    FILE *src = fopen("file.txt", "r"), *temp = fopen("temp.txt", "w");
+    char buf[256];
+    int line = 1, target = 3; // Line to insert before
+
+    if (!src || !temp) return 1;
+
+    while (fgets(buf, sizeof(buf), src)) {
+        if (line++ == target) fputs("INSERTED TEXT\n", temp);
+        fputs(buf, temp);
+    }
+
+    fclose(src); fclose(temp);
+    remove("file.txt");
+    rename("temp.txt", "file.txt");
+    return 0;
+}
+````
 
 
 
@@ -176,7 +244,8 @@ Program:
 Output:
 
 
-//paste your output here
+<img width="431" height="123" alt="image" src="https://github.com/user-attachments/assets/ed315ef9-9f29-4553-a3d3-ca3abc7c9c0e" />
+
 
 
 
@@ -222,7 +291,45 @@ Algorithm:
 
 Program:
 
-//type your code here
+````
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    char name[50];
+    float marks;
+} Subject;
+
+int main() {
+    int numSubjects;
+
+    printf("Enter number of subjects: ");
+    if (scanf("%d", &numSubjects) != 1 || numSubjects <= 0) {
+        printf("Invalid number of subjects.\n");
+        return 1;
+    }
+
+    Subject *subjects = (Subject *)malloc(numSubjects * sizeof(Subject));
+    if (subjects == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+    for (int i = 0; i < numSubjects; i++) {
+        printf("\nSubject %d Name: ", i + 1);
+        scanf("%49s", subjects[i].name);
+        printf("Subject %d Marks: ", i + 1);
+        scanf("%f", &subjects[i].marks);
+    }
+    printf("\n--- Stored Subject Details ---\n");
+    for (int i = 0; i < numSubjects; i++) {
+        printf("Subject: %-15s | Marks: %.2f\n", subjects[i].name, subjects[i].marks);
+    }
+    free(subjects);
+    subjects = NULL;
+
+    return 0;
+}
+````
 
 
 
@@ -230,7 +337,8 @@ Program:
 Output:
 
 
-//paste your output here
+<img width="428" height="589" alt="image" src="https://github.com/user-attachments/assets/ac357916-f78f-49ff-bf71-354a9a2942be" />
+
 
 
 
