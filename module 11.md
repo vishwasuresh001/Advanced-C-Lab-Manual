@@ -1,6 +1,7 @@
 
 
 EXP NO:21 C PROGRAM TO CREATE A FUNCTION TO FIND THE GREATEST NUMBER
+
 Aim:
 To write a C program to create a function to find the greatest number
 
@@ -14,37 +15,30 @@ Algorithm:
 Program:
 ```
 #include <stdio.h>
-
-int greatest(int a, int b, int c)
-{
-    int max = a;
-
-    if(b > max)
-        max = b;
-
-    if(c > max)
-        max = c;
-
-    return max;
+int max_of_four(int a, int b, int c, int d) {
+    if (a >= b && a >= c && a >= d)
+        return a;
+    else if (b >= a && b >= c && b >= d)
+        return b;
+    else if (c >= a && c >= b && c >= d)
+        return c;
+    else
+        return d;
 }
-
-int main()
-{
-    int a, b, c, result;
-
-    printf("Enter three numbers: ");
-    scanf("%d %d %d", &a, &b, &c);
-
-    result = greatest(a, b, c);
-
-    printf("Greatest number = %d", result);
-
+int main() {
+    int n1, n2, n3, n4, greater;
+    printf("Enter four integers: ");
+    scanf("%d %d %d %d", &n1, &n2, &n3, &n4);
+    greater = max_of_four(n1, n2, n3, n4);
+    printf("The greatest number is: %d\n", greater);
     return 0;
 }
 ```
 
 Output:
-<img width="778" height="285" alt="image" src="https://github.com/user-attachments/assets/78863d40-55f9-456d-a079-9d54ac865d1c" />
+![image](https://github.com/user-attachments/assets/1c3e3a54-1d00-4695-b0e4-05629eac9c14)
+
+
 
 Result:
 Thus, the program  that create a function to find the greatest number is verified successfully.
@@ -52,6 +46,7 @@ Thus, the program  that create a function to find the greatest number is verifie
 
  
 EXP NO:22 C PROGRAM TO PRINT THE MAXIMUM VALUES FOR THE AND, OR AND  XOR COMPARISONS
+
 Aim:
 To write a C program to print the maximum values for the AND, OR and XOR comparisons
 
@@ -67,43 +62,30 @@ Algorithm:
 Program:
 ```
 #include <stdio.h>
-
-int main()
-{
-    int n, k, i, j;
-    int and_val, or_val, xor_val;
-    int max_and = 0, max_or = 0, max_xor = 0;
-
-    scanf("%d %d", &n, &k);
-
-    for(i = 1; i <= n; i++)
-    {
-        for(j = i + 1; j <= n; j++)
-        {
-            and_val = i & j;
-            or_val = i | j;
-            xor_val = i ^ j;
-
-            if(and_val > max_and && and_val < k)
-                max_and = and_val;
-
-            if(or_val > max_or && or_val < k)
-                max_or = or_val;
-
-            if(xor_val > max_xor && xor_val < k)
-                max_xor = xor_val;
+void calculate_the_max(int n, int k) {
+    int a = 0, o = 0, x = 0;
+    for (int i = 1; i < n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+            int and = i & j;
+            int or = i | j;
+            int xor = i ^ j;
+            if (and < k && and > a) a = and;
+            if (or < k && or > o) o = or;
+            if (xor < k && xor > x) x = xor;
         }
     }
-
-    printf("%d\n", max_and);
-    printf("%d\n", max_or);
-    printf("%d\n", max_xor);
-
+    printf("%d\n%d\n%d\n", a, o, x);
+}
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+    calculate_the_max(n, k);
     return 0;
 }
 ```
+
 Output:
-<img width="775" height="276" alt="image" src="https://github.com/user-attachments/assets/5c3836d4-b745-4979-9d51-76852f31e67b" />
+![image](https://github.com/user-attachments/assets/e8f7fcce-f471-4bfe-8269-2cf2271418f0)
 
 
 Result:
@@ -113,6 +95,7 @@ is verified successfully.
 
  
 EXP NO:23 C PROGRAM TO WRITE THE LOGIC FOR THE REQUESTS
+
 Aim:
 To write a C program to write the logic for the requests
 
@@ -126,44 +109,42 @@ Algorithm:
 Program:
 ```
 #include <stdio.h>
-
-int main()
-{
-    int n, k, i, j;
-    int and_val, or_val, xor_val;
-    int max_and = 0, max_or = 0, max_xor = 0;
-
-    scanf("%d %d", &n, &k);
-
-    for(i = 1; i <= n; i++)
-    {
-        for(j = i + 1; j <= n; j++)
-        {
-            and_val = i & j;
-            or_val = i | j;
-            xor_val = i ^ j;
-
-            if(and_val < k && and_val > max_and)
-                max_and = and_val;
-
-            if(or_val < k && or_val > max_or)
-                max_or = or_val;
-
-            if(xor_val < k && xor_val > max_xor)
-                max_xor = xor_val;
+#include <stdlib.h>
+int main() {
+    int noshel, noque;
+    scanf("%d %d", &noshel, &noque);
+    int *nobookarr = (int *)calloc(noshel, sizeof(int));
+    int **shelarr = (int **)malloc(noshel * sizeof(int *));
+    for (int i = 0; i < noshel; i++) shelarr[i] = NULL;
+    for (int i = 0; i < noque; i++) {
+        int type;
+        scanf("%d", &type);
+        if (type == 1) {
+            int shelf, pages;
+            scanf("%d %d", &shelf, &pages);
+            int books = nobookarr[shelf];
+            shelarr[shelf] = (int *)realloc(shelarr[shelf], (books + 1) * sizeof(int));
+            shelarr[shelf][books] = pages;
+            nobookarr[shelf]++;
+        } else if (type == 2) {
+            int shelf, book;
+            scanf("%d %d", &shelf, &book);
+            printf("%d\n", shelarr[shelf][book]);
+        } else if (type == 3) {
+            int shelf;
+            scanf("%d", &shelf);
+            printf("%d\n", nobookarr[shelf]);
         }
     }
-
-    printf("%d\n", max_and);
-    printf("%d\n", max_or);
-    printf("%d\n", max_xor);
-
+    for (int i = 0; i < noshel; i++) free(shelarr[i]);
+    free(shelarr);
+    free(nobookarr);
     return 0;
 }
-```
 
+```
 Output:
-<img width="580" height="337" alt="image" src="https://github.com/user-attachments/assets/1a985602-6ee4-457b-896a-a85f870a2415" />
+![image](https://github.com/user-attachments/assets/8ec04c51-44f6-47b8-a056-12940d99b774)
 
 
 
@@ -190,28 +171,21 @@ Algorithm:
 Program:
 ```
 #include <stdio.h>
-
-int main()
-{
-    int a[100], n, i, sum = 0;
-
+int main() {
+    int n;
     scanf("%d", &n);
-
-    for(i = 0; i < n; i++)
-    {
+    int a[n], sum = 0;
+    for (int i = 0; i < n; i++) {
         scanf("%d", &a[i]);
-        sum = sum + a[i];
+        sum += a[i];
     }
-
-    printf("%d", sum);
-
+    printf("%d\n", sum);
     return 0;
 }
 ```
 
 Output:
-<img width="856" height="367" alt="image" src="https://github.com/user-attachments/assets/c32a7e3f-29df-49c2-95d3-b43719e8e182" />
-
+![image](https://github.com/user-attachments/assets/4d7008fa-8d5b-4e62-87ba-a97f8fc3182a)
 
  
 
@@ -244,31 +218,32 @@ o	If a character is not a space, it may belong to a word. If it's the first non-
 Program:
 ```
 #include <stdio.h>
-
-int main()
-{
-    char str[200];
-    int i, count = 0;
-
-    fgets(str, sizeof(str), stdin);
-
-    for(i = 0; str[i] != '\0'; i++)
-    {
-        if(str[i] == ' ' && str[i + 1] != ' ')
-            count++;
+#include <ctype.h>
+int main() {
+    char sentence[1000];
+    int count = 0, inWord = 0;
+    fgets(sentence, sizeof(sentence), stdin);
+    for (int i = 0; sentence[i] != '\0'; i++) {
+        if (isalpha(sentence[i]))
+        {
+            if (!inWord)
+            {
+                count++;
+                inWord = 1;
+            }
+        } 
+        else 
+        {
+            inWord = 0;
+        }
     }
-
-    if(str[0] != '\n')
-        count++;
-
-    printf("%d", count);
-
+    printf("%d\n", count);
     return 0;
 }
 ```
 
 Output:
-<img width="852" height="397" alt="image" src="https://github.com/user-attachments/assets/17d76506-61c3-4d3a-bbee-ac52e7e5c468" />
+![image](https://github.com/user-attachments/assets/7428642c-66e9-4905-a1d0-2c5c13d1c9ad)
 
 
 
