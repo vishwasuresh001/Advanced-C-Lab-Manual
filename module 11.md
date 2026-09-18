@@ -12,10 +12,39 @@ Algorithm:
 5.	Call the max_of_four function with the input integers and store the result in the greater variable
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+int greatest(int a, int b, int c)
+{
+    int max = a;
+
+    if(b > max)
+        max = b;
+
+    if(c > max)
+        max = c;
+
+    return max;
+}
+
+int main()
+{
+    int a, b, c, result;
+
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &a, &b, &c);
+
+    result = greatest(a, b, c);
+
+    printf("Greatest number = %d", result);
+
+    return 0;
+}
+```
 
 Output:
-//paste your output here
+<img width="778" height="285" alt="image" src="https://github.com/user-attachments/assets/78863d40-55f9-456d-a079-9d54ac865d1c" />
 
 Result:
 Thus, the program  that create a function to find the greatest number is verified successfully.
@@ -36,10 +65,46 @@ Algorithm:
 7.	Call the calculate_the_max function with input values.
  
 Program:
-//type your code here
+```
+#include <stdio.h>
 
+int main()
+{
+    int n, k, i, j;
+    int and_val, or_val, xor_val;
+    int max_and = 0, max_or = 0, max_xor = 0;
+
+    scanf("%d %d", &n, &k);
+
+    for(i = 1; i <= n; i++)
+    {
+        for(j = i + 1; j <= n; j++)
+        {
+            and_val = i & j;
+            or_val = i | j;
+            xor_val = i ^ j;
+
+            if(and_val > max_and && and_val < k)
+                max_and = and_val;
+
+            if(or_val > max_or && or_val < k)
+                max_or = or_val;
+
+            if(xor_val > max_xor && xor_val < k)
+                max_xor = xor_val;
+        }
+    }
+
+    printf("%d\n", max_and);
+    printf("%d\n", max_or);
+    printf("%d\n", max_xor);
+
+    return 0;
+}
+```
 Output:
-//paste your output here
+<img width="775" height="276" alt="image" src="https://github.com/user-attachments/assets/5c3836d4-b745-4979-9d51-76852f31e67b" />
+
 
 Result:
 Thus, the program to print the maximum values for the AND, OR and XOR comparisons
@@ -59,10 +124,47 @@ Algorithm:
 5.	Use a for loop to iterate over the queries.
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+int main()
+{
+    int n, k, i, j;
+    int and_val, or_val, xor_val;
+    int max_and = 0, max_or = 0, max_xor = 0;
+
+    scanf("%d %d", &n, &k);
+
+    for(i = 1; i <= n; i++)
+    {
+        for(j = i + 1; j <= n; j++)
+        {
+            and_val = i & j;
+            or_val = i | j;
+            xor_val = i ^ j;
+
+            if(and_val < k && and_val > max_and)
+                max_and = and_val;
+
+            if(or_val < k && or_val > max_or)
+                max_or = or_val;
+
+            if(xor_val < k && xor_val > max_xor)
+                max_xor = xor_val;
+        }
+    }
+
+    printf("%d\n", max_and);
+    printf("%d\n", max_or);
+    printf("%d\n", max_xor);
+
+    return 0;
+}
+```
 
 Output:
-//paste your output here
+<img width="580" height="337" alt="image" src="https://github.com/user-attachments/assets/1a985602-6ee4-457b-896a-a85f870a2415" />
+
 
 
 Result:
@@ -86,10 +188,30 @@ Algorithm:
 
 
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+int main()
+{
+    int a[100], n, i, sum = 0;
+
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
+    {
+        scanf("%d", &a[i]);
+        sum = sum + a[i];
+    }
+
+    printf("%d", sum);
+
+    return 0;
+}
+```
 
 Output:
-//paste your output here
+<img width="856" height="367" alt="image" src="https://github.com/user-attachments/assets/c32a7e3f-29df-49c2-95d3-b43719e8e182" />
+
 
  
 
@@ -120,10 +242,34 @@ o	If a character is not a space, it may belong to a word. If it's the first non-
 
 
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+int main()
+{
+    char str[200];
+    int i, count = 0;
+
+    fgets(str, sizeof(str), stdin);
+
+    for(i = 0; str[i] != '\0'; i++)
+    {
+        if(str[i] == ' ' && str[i + 1] != ' ')
+            count++;
+    }
+
+    if(str[0] != '\n')
+        count++;
+
+    printf("%d", count);
+
+    return 0;
+}
+```
 
 Output:
-//paste your output here
+<img width="852" height="397" alt="image" src="https://github.com/user-attachments/assets/17d76506-61c3-4d3a-bbee-ac52e7e5c468" />
+
 
 
 
